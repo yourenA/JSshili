@@ -1,0 +1,341 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+</head>
+<style>
+
+    img{border:none;} ul,li{list-style-type:none;}
+    input{outline: none;}
+    a{text-decoration:none;}
+    .clearfix{overflow: hidden; _zoom:1;}
+    .fl{float:left; display:block;}
+    .fr{float:right; display:block;}
+    .hide{display:none;}
+    .table {display:table;width: 100%;}
+    .t_cell {display:table-cell;vertical-align: middle;}
+    .t_row{display: table-row;}
+    .test{
+        border-radius: 3px;
+        position:relative;
+        top:0px;
+        left:0px;
+        z-index:20;
+        behavior: url(ie-css3.htc);
+    }
+    .content{
+        width:850px;
+        height:850px;
+    }
+    .content ul li{
+        height:180px;
+        width:850px;
+        margin:60px 0 0 12px;
+    }
+    .content ul li .c_left{
+        width:150px;
+        height:180px;
+        float:left;
+    }
+    .content ul li .c_right{
+        width:670px;
+        height:180px;
+        float:left;
+        margin-left:30px;
+    }
+    .c_right p{
+        font-size:18px;
+        font-family:"宋体";
+        color:#000;
+    }
+    .c_right div{
+        font-size:14px;
+        font-family:"宋体";
+        color:#000;
+        line-height:26px;
+    }
+    .c_right div span{
+        margin-left:15px;
+        font-size:14px;
+        font-family:"宋体";
+        color:#c72b02;
+        line-height:26px;
+        text-decoration:underline;
+    }
+    .content ul li img{
+        width:100%;
+        height:100%;
+    }
+    .pages-box{
+        width: 100%;
+        height: 50px;
+        background: #ffffff;
+        margin: 0 auto;
+        overflow-y: auto;
+        margin-top:20px;
+    }
+    .big-box input{
+        width: 200px;
+        height: 20px;
+        padding: 5px;
+        margin-top: 5px;
+    }
+    .fanye p{
+        width: 330px;
+        margin: 0 auto;
+        font-size: 14px;
+    }
+    .fanye p a{
+        margin-left: 20px;
+        text-decoration: none;
+
+        color: #000000;
+
+    }
+    .fanye a:hover{
+        color: #D44D51;
+    }
+</style>
+<script type="text/javascript" charset="utf-8" src="/wd/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        function removeHTMLTag(str) {
+            str = str.replace(/<\/?[^>]*>/g, ''); //去除HTML tag
+            str = str.replace(/[ | ]*\n/g, '\n'); //去除行尾空白
+            //str = str.replace(/\n[\s| | ]*\r/g,'\n'); //去除多余空行
+            str = str.replace(/&nbsp;/ig, '');//去掉&nbsp;
+            str = str.replace(/\s/g, ''); //将空格去掉
+            return str;
+        }
+        var pages;
+        $.ajax({
+            type: 'POST',
+            data: {lmmc: '党校概况_专家教授'},
+            url: '/service?wdApplication=wd&wdService=wzwzcx',
+            dataType: 'json',
+            success: function (wzList) {
+
+                var str='', arr_ele=[];
+                $.each(wzList,function(i,v){
+                    if(!!v.gdtpwj)arr_ele.push(v);
+                });
+
+                var bigBoxW=$('.pics-box').width();/*获取容器的宽高*/
+                var bigBoxH=$('.pics-box').height();
+
+                var picItemW=840;/*获取每个列表的宽高*/
+                var picItemH=240;
+
+                var countH=parseInt(bigBoxH/picItemH);/*行数*/
+                var countW=parseInt(bigBoxW/picItemW);/*列数*/
+
+                var showCount=countW*countH;/*一页显示的个数*/
+
+                var allCount=arr_ele.length;/*总的个数*/
+
+
+                var nowpage=1;
+                pages=Math.ceil(allCount/showCount);/*页数*/
+
+                $('#now').text(nowpage);
+                $('#pageCount').text(pages);
+
+                function getContent(zwwjList,bt,gdtpwj,wzid,lmid){
+                    var newStr = removeHTMLTag(zwwjList.content);
+                    var textPattern = /发布时间/;
+                    var pos = newStr.search(textPattern) + 15;
+                    zwwjContent = newStr.substring(pos);
+                    if (zwwjContent.length > 200) {
+                        zwwjContent = zwwjContent.substr(0, 200) + '......';
+                    }
+                    $("<a href= '/web/loadWebPage.do?4441_"+wzid+"_"+lmid+"_4'><li><div class='c_left'><img src='" + gdtpwj + "'/></div><div class='c_right'><p>" + bt + "</p><div>" + zwwjContent + "<span>[详细介绍]</span></div> </div> </li></a>").appendTo("#zjjs-ul");
+
+                }
+
+                for(var i=0;i<nowpage*showCount;i++){
+                    var zwwjUrl = arr_ele[i].zwwj;
+                    var bt = arr_ele[i].bt,
+                            gdtpwj=arr_ele[i].gdtpwj,
+                            wzid = arr_ele[i].wzid,
+                            lmid = arr_ele[i].lmid;
+                    $.ajax({
+                        type: 'POST',
+                        data: {path: zwwjUrl},
+                        url: '/service?wdApplication=wd&wdService=filenr&wdApp=xw&noedit=0',
+                        dataType: 'json',
+                        async:false,
+                        success: function (zwwjList) {
+                            getContent(zwwjList,bt,gdtpwj,wzid,lmid);
+
+                        }
+                    });
+
+                }
+
+                $('#next').click(function(){
+                    if (nowpage<pages){
+                        nowpage++;
+                        $('#now').text(nowpage);
+                        $('.pics-box-ul').empty();
+                        for(var i=(nowpage-1)*showCount;i<nowpage*showCount;i++){
+                            var zwwjUrl = arr_ele[i].zwwj;
+                            var bt = arr_ele[i].bt,
+                                    gdtpwj=arr_ele[i].gdtpwj,
+                                    wzid = arr_ele[i].wzid,
+                                    lmid = arr_ele[i].lmid;
+                            $.ajax({
+                                type: 'POST',
+                                data: {path: zwwjUrl},
+                                url: '/service?wdApplication=wd&wdService=filenr&wdApp=xw&noedit=0',                            dataType: 'json',
+                                async:false,
+                                success: function (zwwjList) {
+                                    getContent(zwwjList,bt,gdtpwj,wzid,lmid);
+                                }
+                            });
+                        }
+                    }else{
+                        return false;
+                    }
+                });
+                $('#pre').click(function(){
+
+                    if (nowpage>1){
+                        nowpage--;
+                        $('#now').text(nowpage);
+                        $('.pics-box-ul').empty();
+                        for(var i=(nowpage-1)*showCount;i<nowpage*showCount;i++){
+                            var zwwjUrl = arr_ele[i].zwwj;
+                            var bt = arr_ele[i].bt,
+                                    gdtpwj=arr_ele[i].gdtpwj,
+                                    wzid = arr_ele[i].wzid,
+                                    lmid = arr_ele[i].lmid;
+                            $.ajax({
+                                type: 'POST',
+                                data: {path: zwwjUrl},
+                                url: '/service?wdApplication=wd&wdService=filenr&wdApp=xw&noedit=0',                            dataType: 'json',
+                                async:false,
+                                success: function (zwwjList) {
+                                    getContent(zwwjList,bt,gdtpwj,wzid,lmid);
+                                }
+                            });
+                        }
+                    }else{
+                        return false;
+                    }
+                });
+
+                $('#first').click(function(){
+                    nowpage=1;
+                    $('#now').text(nowpage);
+                    $('.pics-box-ul li').hide();
+                    $('.pics-box-ul').empty();
+                    for(var i=(nowpage-1)*showCount;i<nowpage*showCount;i++){
+                        var zwwjUrl = arr_ele[i].zwwj;
+                        var bt = arr_ele[i].bt,
+                                gdtpwj=arr_ele[i].gdtpwj,
+                                wzid = arr_ele[i].wzid,
+                                lmid = arr_ele[i].lmid;
+                        $.ajax({
+                            type: 'POST',
+                            data: {path: zwwjUrl},
+                            url: '/service?wdApplication=wd&wdService=filenr&wdApp=xw&noedit=0',                            dataType: 'json',
+                            async:false,
+                            success: function (zwwjList) {
+                                getContent(zwwjList,bt,gdtpwj,wzid,lmid);
+                            }
+                        });
+                    }
+                });
+                $('#last').click(function(){
+                    nowpage=pages;
+                    $('#now').text(nowpage);
+                    $('.pics-box-ul').empty();
+                    for(var i=(nowpage-1)*showCount;i<nowpage*showCount;i++){
+                        var zwwjUrl = arr_ele[i].zwwj;
+                        var bt = arr_ele[i].bt,
+                                gdtpwj=arr_ele[i].gdtpwj,
+                                wzid = arr_ele[i].wzid,
+                                lmid = arr_ele[i].lmid;
+                        $.ajax({
+                            type: 'POST',
+                            data: {path: zwwjUrl},
+                            url: '/service?wdApplication=wd&wdService=filenr&wdApp=xw&noedit=0',
+                            dataType: 'json',
+                            async:false,
+                            success: function (zwwjList) {
+                                getContent(zwwjList,bt,gdtpwj,wzid,lmid);
+                            }
+                        });
+                    }
+                });
+                /*console.log(wzList);
+                 var wzList = wzList;
+                 var zwwjContent = '';
+                 for (var i = 0; i<=2; i++) {
+                 if (wzList[i].bt != undefined) {
+                 var bt = wzList[i].bt,
+                 gdtpwj=wzList[i].gdtpwj,
+                 wzid = wzList[i].wzid,
+                 lmid = wzList[i].lmid;
+                 var zwwjUrl = wzList[i].zwwj;
+
+
+                 $.ajax({
+                 type: 'POST',
+                 data: {path: zwwjUrl},
+                 url: '/service?wdApplication=wd&wdService=filenr&wdApp=xw&noedit=0',                            dataType: 'json',
+                 async:false,
+                 success: function (zwwjList) {
+                 console.log(12);
+                 var newStr = removeHTMLTag(zwwjList.content);
+                 var textPattern = /发布时间/;
+                 var pos = newStr.search(textPattern) + 15;
+                 zwwjContent = newStr.substring(pos);
+                 if (zwwjContent.length > 90) {
+                 zwwjContent = zwwjContent.substr(0, 90) + '......';
+                 }
+                 $("<a href= '/web/loadWebPage.do?4441_"+wzid+"_"+lmid+"_4'><li><div class='c_left'><img src='" + gdtpwj + "'/></div><div class='c_right'><p>" + bt + "</p><div>" + zwwjContent + "<span>[详细介绍]</span></div> </div> </li></a>").appendTo("#zjjs-ul");
+
+                 }
+                 });
+
+
+                 }
+                 }*/
+            }
+
+
+        });
+    });
+</script>
+<body>
+<div class="content">
+    <div class="pics-box" style="width: 850px;height: 720px" id="pics-box">
+        <ul class="pics-box-ul" id="zjjs-ul">
+            <!--<li>
+                        <div class="c_left">
+                            <img src="/nndx/image/xjp.png"/>
+                        </div>
+                        <div class="c_right">
+                            <p>习近平教授</p>
+                            <div>
+                                第十五届中央候补委员，十六届、十七届、十八届中央委员，十七届中央政治局委员、常委、中央书记处书记，十八届中央政治局委员、常委、中央委员会总书记。第十一届全国人大第一次会议当选为中华人民共和国副主席。十七届五中全会增补为中共中央军事委员会副主席。第十一届全国人大常委会第十七次会议任命为中华人民共和国中央军事委员会副主席。十八届一中全会任中...	<a href="#">[详细介绍]</a>
+                            </div>
+                        </div>
+                    </li>-->
+        </ul>
+
+    </div>
+
+    <div class="pages-box">
+        <div class="fanye">
+            <p>当前<span id="now">1</span>/<span id="pageCount"></span>页 <a href="javascript:void(0);" id="first">首页</a><a href="javascript:void(0);" id="pre">上一页</a><a href="javascript:void(0);" id="next">下一页</a><a
+                    href="javascript:void(0);" id="last">尾页</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

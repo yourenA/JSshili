@@ -1,0 +1,30 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+        function MyClick(e) {
+            var e = event||window.event;
+            if (e.button ==1) {
+                alert("event.button ==1,你好");
+            }
+            else if (e.button ==0){
+                alert("event.button ==0左击");
+            }
+            else if (e.button ==2){
+                alert("event.button ==2禁止复制");
+            }
+        else {
+                setTimeout("close();", 2000);
+            }
+        }
+        function close() {
+            window.opener =null;
+            window.close();
+        }
+    </script>
+</head>
+<body onmouseup="MyClick()">
+<br />
+</body>
+</html>

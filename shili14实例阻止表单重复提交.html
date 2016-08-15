@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function(){
+            var flag = true;//设置一个监听变量
+            var btn=document.getElementById('btn');
+            btn.onclick=function(){
+                if (flag){
+                    alert(1)
+                    flag=false;
+                }else {
+                    alert(2)
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <button id="btn">123</button>
+</body>
+</html>

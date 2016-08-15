@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+            color: #000000;
+        }
+        .link{
+            margin: 25px auto;
+            width: 1200px;
+            height: 80px;
+        //background: lightslategrey;
+            padding-top: 1px;
+        }
+        .link-box{
+            position: relative;
+            display: inline-block;
+            float: left;
+            width: 260px;
+            height: 37px;
+            margin: 20px 10px;
+            border: 1px solid #aeaeae;
+            text-align: left;
+            line-height: 37px;
+            background:url("/nndx/image/turn_dowm.png") 230px center no-repeat;
+            text-indent: 35px;
+        }
+        .link-box-title{
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .link-box-title p{
+            font-size: 18px;
+            font-family: "微软雅黑";
+            text-indent: 35px;
+        }
+        .link-ul{
+            width: 260px;
+            position: absolute;
+            height: 502px;
+            left: -1px;
+            top: -504px;
+            background: #FCFCFC;
+            overflow: auto;
+            display: none;
+            border: 1px solid #aeaeae;
+            overflow-x: hidden;
+        }
+        .link-ul li{
+            height: 25px;
+            line-height: 25px;
+            font-weight: normal;
+            display: block;
+            white-space: pre;
+            min-height: 1.2em;
+            padding: 0px 2px 1px;
+        }
+        .link-ul li:hover{background-color: #1e90ff;}
+        .link-ul li a{
+            font-size: 18px;
+            font-family: 微软雅黑;
+
+        }
+        .link-ul li a:hover{
+            text-decoration: none;
+            color: #FFFFFF;
+            font-size: 18px;
+        }
+    </style>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script >
+        $(document).ready(function() {
+            $('.link-box-title').click(function(e){
+                var ev = e || window.event;
+                ev.cancelBubble = true;//停止冒泡
+                ev.stopPropagation();
+                if ($(this).siblings(".link-ul").css("display")=="none"){
+                    $(this).siblings(".link-ul").toggle();
+                    $(this).parent(".link-box").siblings().find(".link-ul").hide();
+                }else{
+                    $(this).siblings(".link-ul").toggle();
+                }
+
+            });
+            $(document).click(function(){
+                $(".link-ul").hide();
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="link">
+    <div class="link-box">
+        <div class="link-box-title">
+            <p>政府网站链接</p>
+        </div>
+
+        <ul class="link-ul " >
+            <li><a href="http://www.gov.cn" target="_blank">中央人民政府</a></li>
+            <li><a href="http://www.gxzf.gov.cn" target="_blank">广西省人民政府</a></li>
+            <li><a href="http://www.nanning.gov.cn" target="_blank">南宁市人民政府</a></li>
+            <li><a href="http://www.beijing.gov.cn" target="_blank">北京市人民政府</a></li>
+            <li><a href="http://www.tj.gov.cn" target="_blank">天津市人民政府</a></li>
+            <li><a href="http://www.shanghai.gov.cn" target="_blank">上海市人民政府</a></li>
+            <li><a href="http://www.cq.gov.cn" target="_blank">重庆市人民政府</a></li>
+            <li><a href="http://www.gd.gov.cn" target="_blank">广东省人民政府</a></li>
+            <li><a href="http://www.ln.gov.cn" target="_blank">辽宁省人民政府</a></li>
+            <li><a href="http://www.jl.gov.cn" target="_blank">吉林省人民政府</a></li>
+            <li><a href="http://www.hlj.gov.cn" target="_blank">黑龙江省人民政府</a></li>
+            <li><a href="http://www.hebei.gov.cn" target="_blank">河北省人民政府</a></li>
+            <li><a href="http://www.jiangsu.gov.cn" target="_blank">江苏省人民政府</a></li>
+            <li><a href="http://www.zj.gov.cn" target="_blank">浙江省人民政府</a></li>
+            <li><a href="http://www.ah.gov.cn" target="_blank">安徽省人民政府</a></li>
+            <li><a href="http://www.fujian.gov.cn" target="_blank">福建省人民政府</a></li>
+            <li><a href="http://www.jiangxi.gov.cn" target="_blank">江西省人民政府</a></li>
+            <li><a href="http://www.sd.gov.cn" target="_blank">山东省人民政府</a></li>
+            <li><a href="http://www.henan.gov.cn" target="_blank">河南省人民政府</a></li>
+            <li><a href="http://www.hunan.gov.cn" target="_blank">湖南省人民政府</a></li>
+            <li><a href="http://www.nmg.gov.cn" target="_blank">内蒙古自治区人民政府</a></li>
+            <li><a href="http://www.hubei.gov.cn" target="_blank">湖北省人民政府</a></li>
+            <li><a href="http://www.sc.gov.cn" target="_blank">四川省人民政府</a></li>
+            <li><a href="http://www.gzgov.gov.cn" target="_blank">贵州省人民政府</a></li>
+            <li><a href="http://www.yn.gov.cn" target="_blank">云南省人民政府</a></li>
+            <li><a href="http://www.shaanxi.gov.cn" target="_blank">陕西省人民政府</a></li>
+            <li><a href="http://www.xizang.gov.cn/index.do" target="_blank">西藏自治区人民政府</a></li>
+            <li><a href="http://www.qh.gov.cn" target="_blank">青海省人民政府</a></li>
+            <li><a href="http://www.gansu.gov.cn" target="_blank">甘肃省人民政府</a></li>
+            <li><a href="http://www.xinjiang.gov.cn" target="_blank">新疆自治区人民政府</a></li>
+            <li><a href="http://www.nx.gov.cn" target="_blank">宁夏自治区人民政府</a></li>
+            <li><a href="http://www.hainan.gov.cn" target="_blank">海南省人民政府</a></li>
+            <li><a href="http://www.shanxigov.cn" target="_blank">山西省人民政府</a></li>
+            <li><a href="http://www.gov.mo" target="_blank">澳门特区人民政府</a></li>
+            <li><a href="http://www.gov.hk" target="_blank">香港特区人民政府</a></li>
+        </ul>
+    </div>
+
+    <div class="link-box">
+        <div class="link-box-title">
+            <p>全国党校行政学院</p>
+        </div>
+        <ul class="link-ul" >
+            <li><a href="http://www.ccps.gov.cn" target="_blank">中共中央党校</a></li>
+            <li><a href="http://www.sdx.sh.cn" target="_blank">上海市委党校,上海行政学院</a></li>
+            <li><a href="http://www.gddx.gov.cn" target="_blank">广东省委党校,广东行政学院</a></li>
+            <li><a href="http://www.zjdx.gov.cn" target="_blank">浙江省委党校,浙江行政学院</a></li>
+            <li><a href="http://www.sdx.js.cn" target="_blank">江苏省委党校,江苏省行政学院</a></li>
+            <li><a href="http://www.sddx.gov.cn" target="_blank">山东省委党校</a></li>
+            <li><a href="http://www.hebxzxy.gov.cn" target="_blank">河北行政学院</a></li>
+            <li><a href="http://www.dangxiao.henan.gov.cn" target="_blank">河南省委党校,河南行政学院</a></li>
+            <li><a href="http://www.hnswdx.gov.cn" target="_blank">湖南省委党校</a></li>
+            <li><a href="http://www.hbdx.gov.cn/structure" target="_blank">湖北省委党校</a></li>
+            <li><a href="http://www.zgfjswdx.gov.cn" target="_blank">福建省委党校</a></li>
+            <li><a href="http://www.bac.gov.cn" target="_blank">北京市市委党校</a></li>
+            <li><a href="http://www.tjdx.gov.cn" target="_blank">天津市市委党校</a></li>
+            <li><a href="http://www.sxswdx.gov.cn" target="_blank">山西省省委党校</a></li>
+            <li><a href="http://www.nmdx.edu.cn" target="_blank">内蒙古自治区区委党校</a></li>
+            <li><a href="http://www.lndx.gov.cn" target="_blank">辽宁省省委党校</a></li>
+            <li><a href="http://www.jldx.gov.cn" target="_blank">吉林省省委党校</a></li>
+            <li><a href="http://www.hljdx.gov.cn1" target="_blank">黑龙江省省委党校</a></li>
+            <li><a href="http://www.ahdx.gov.cn" target="_blank">安徽省省委党校</a></li>
+            <li><a href="http://www.sdx.js.cn" target="_blank">江苏省省委党校</a></li>
+            <li><a href="http://www.jxdx.gov.cn" target="_blank">江西省省委党校</a></li>
+            <li><a href="http://www.gxdx.gov.cn" target="_blank">广西壮族自治区区委党校</a></li>
+            <li><a href="http://www.dx.hainan.gov.cn" target="_blank">海南省省委党校</a></li>
+            <li><a href="http://www.shxdx.com" target="_blank">陕西省省委党校</a></li>
+            <li><a href="http://www.gsdx.gov.cn" target="_blank">甘肃省省委党校</a></li>
+            <li><a href="http://www.nxdx.org.cn" target="_blank">宁夏回族自治区区委党校</a></li>
+            <li><a href="http://www.qhswdx.com" target="_blank">青海省省委党校</a></li>
+            <li><a href="http://www.xjdx.gov.cn" target="_blank">新疆维吾尔自治区区委党校</a></li>
+            <li><a href="http://www.cqdx.gov.cn" target="_blank">重庆市市委党校</a></li>
+            <li><a href="http://www.scge.gov.cn" target="_blank">四川省省委党校</a></li>
+            <li><a href="http://www.gzdx.gov.cn" target="_blank">贵州省省委党校</a></li>
+            <li><a href="http://www.ynce.gov.cn" target="_blank">云南省省委党校</a></li>        </ul>
+    </div>
+
+    <div class="link-box">
+        <div class="link-box-title">
+            <p>区地市县政府和党校</p>
+        </div>
+        <ul class="link-ul" >
+            <li><a href="http://www.nanning.gov.cn/" target="_blank">南宁市人民政府</a></li>
+            <li><a href="http://www.wuming.gov.cn/" target="_blank">武鸣县人民政府</a></li>
+            <li><a href="http://www.gxhx.gov.cn/" target="_blank">横县人民政府</a></li>
+            <li><a href="http://www.binyang.gov.cn/" target="_blank">宾阳县人民政府</a></li>
+            <li><a href="http://slx.nanning.gov.cn/" target="_blank">上林县人民政府</a></li>
+            <li><a href="http://msx.nanning.gov.cn/" target="_blank">马山县人民政府</a></li>
+            <li><a href="http://lax.nanning.gov.cn/" target="_blank">隆安县人民政府</a></li>
+            <li><a href="http://www.guilin.gov.cn/" target="_blank">桂林市人民政府</a></li>
+            <li><a href="http://www.baise.gov.cn/" target="_blank">百色市人民政府</a></li>
+            <li><a href="http://www.yulin.gov.cn/" target="_blank">玉林市人民政府</a></li>
+            <li><a href="http://www.yldx.gov.cn/" target="_blank">玉林市委党校</a></li>
+            <li><a href="http://www.qinzhou.gov.cn/" target="_blank">钦州市人民政府</a></li>
+            <li><a href="http://www.beihai.gov.cn/" target="_blank">北海市人民政府</a></li>
+            <li><a href="http://www.wuzhou.gov.cn/" target="_blank">梧州市人民政府</a></li>
+            <li><a href="http://www.liuzhou.gov.cn/" target="_blank">柳州市人民政府</a></li>
+            <li><a href="http://www.lzdx.gov.cn/" target="_blank">柳州市委党校</a></li>
+            <li><a href="http://www.gxhc.gov.cn/" target="_blank">河池市人民政府</a></li>
+            <li><a href="http://www.fcg.gx.cei.gov.cn/" target="_blank">防城港市人民政府</a></li>
+            <li><a href="http://www.gxhz.gov.cn/" target="_blank">贺州市人民政府</a></li>
+            <li><a href="http://www.laibin.gov.cn/" target="_blank">来宾市人民政府</a></li>
+            <li><a href="http://www.gxlbdx.com/" target="_blank">来宾市委党校</a></li>
+            <li><a href="http://www.chongzuo.gov.cn/" target="_blank">崇左市人民政府</a></li>
+            <li><a href="http://www.gxgg.gov.cn/" target="_blank">贵港市人民政府</a></li>        </ul>
+    </div>
+    <div class="link-box">
+        <div class="link-box-title">
+            <p>新闻媒体网站链接</p>
+        </div>
+        <ul class="link-ul" >
+            <li><a href="http://www.gxnews.com.cn/" target="_blank">广西新闻网</a></li>
+            <li><a href="http://www.people.com.cn" target="_blank">人民网</a></li>
+            <li><a href="http://www.xinhuanet.com" target="_blank">新华网</a></li>
+            <li><a href="http://www.chinanews.com.cn" target="_blank">中国新闻网</a></li>
+            <li><a href="http://news.sina.com.cn" target="_blank">新浪新闻</a></li>
+            <li><a href="http://news.qq.com" target="_blank">腾讯新闻</a></li>
+            <li><a href="http://www.ifeng.com" target="_blank">凤凰网</a></li>
+            <li><a href="http://news.sohu.com" target="_blank">搜狐新闻</a></li>
+            <li><a href="http://www.cctv.com" target="_blank">CCTV</a></li>
+            <li><a href="http://news.163.com" target="_blank">网易新闻</a></li>
+            <li><a href="http://www.zaobao.com" target="_blank">联合早报</a></li>
+            <li><a href="http://www.people.com.cn" target="_blank">南方网</a></li>
+            <li><a href="http://www.cnr.cn" target="_blank">中国广播网</a></li>
+            <li><a href="http://news.baidu.com" target="_blank">百度新闻搜索</a></li>
+            <li><a href="http://www.gmw.cn" target="_blank">光明网</a></li>
+            <li><a href="http://www.cyol.net" target="_blank">中国青年报</a></li>
+            <li><a href="http://gb.cri.cn" target="_blank">CRI国际在线</a></li>
+            <li><a href="http://gb.cri.cn" target="_blank">中国政府网</a></li>
+            <li><a href="http://www.fmprc.gov.cn" target="_blank">外交部</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

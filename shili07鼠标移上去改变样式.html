@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function initEven() {
+            var footballs = document.getElementById("football"); //取id费football的标签
+            var lis = footballs.getElementsByTagName("li"); //取name为li 的标签
+            for (var i =0; i < lis.length; i++) { //遍历
+                var li = lis[i];
+                li.onmouseover =function() { //当鼠标移动到某个li上时执行
+                    var footballs = document.getElementById("football");
+                    var lis = footballs.getElementsByTagName("li");
+                    for (var i =0; i < lis.length; i++) { //遍历
+                        var li = lis[i];
+                        if (li ==this) {
+                            li.style.background ="red"; //将当前的背景设为红色
+                            li.onclick =function() { //当点击是将字体设为30号
+                                this.style.fontSize =30+"px";
+                            }
+                        }
+                        else {
+                            li.style.background ="white"; //将其余的背景设为白色
+                            li.style.fontSize =18+"px"; //将其余的字体设为18号，要记住加px
+                        }
+                    }
+                }
+                /*li.onclick =function() {
+                    this.style.fontSize =30;
+
+                }*/
+            }
+        }
+    </script>
+</head>
+<body onload="initEven() ">
+<ul id="football">
+    <li>曼联</li>
+    <li>中国</li>
+    <li>美国</li>
+    <li>阿根廷</li>
+    <li>西班牙</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/erweima.js"></script>
+    <script>
+       window.onload=function(){
+           var qrcode = new QRCode(document.getElementById("qrcode"), {
+               width : 200,
+               height : 200
+           });
+           var token='para';
+           var QRCodeUrl='http://www.daijiaru.site'+'/SouthSea/SouthSea/SouthSea.php?id=1&belong=nansha';
+           qrcode.makeCode(QRCodeUrl);
+       }
+    </script>
+</head>
+<body>
+<div id="qrcode" style="width:200px; height:200px;position: fixed;bottom: 40%; right: 20%;"></div>
+</body>
+</html>

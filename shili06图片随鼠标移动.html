@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div id="fly"  style="width:50px;height:50px;position: absolute;">
+    <img src="image/person.png"/><br />
+    哈哈！我会飞！
+</div>
+<script type="text/javascript">
+    document.onmousemove =function(e) {        //当鼠标移动式获取当前x，y坐标值
+        var e =e||window.event;
+        var x = e.clientX;
+        var y = e.clientY;
+        /*console.log(x+""+y)*/
+        var f = document.getElementById("fly");        //取到id为fly的标签内容赋值于f
+      /*  if (!f) {                                //如果没有取到，则返回
+            return;
+        }*/
+        f.style.left = x+"px";                        //否则将f的坐标设为鼠标坐标值x，y,不要忘了px
+        f.style.top = y+"px";
+        document.getElementById('t1').value=x;
+        document.getElementById('t2').value=y;
+    }
+</script>
+<br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+<br>
+<input type="text" id="t1">
+<input type="text" id="t2">
+</body>
+</html>

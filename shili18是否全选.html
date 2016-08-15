@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" language="JavaScript">
+
+    function selectCheckbox2(){
+        var fruits=document.getElementsByName("fruit");
+        var mycheckbox=document.getElementById('mycheckbox');
+        if (mycheckbox.checked){
+
+            for(i=0;i<fruits.length;i++){
+                fruits[i].checked=true;
+            }
+        }else{
+            for(i=0;i<fruits.length;i++){
+                fruits[i].checked=false;
+            }
+        }
+        var totalprice = 0;
+        for (var i = 0; i < fruits.length; i++) {
+            if (fruits[i].checked) {
+                totalprice += parseInt(fruits[i].value);
+            }
+        }
+        var myspan=document.getElementById('myspan')
+        myspan.innerText = totalprice + "元";
+
+    }
+
+    function gouwu() {
+
+        var fruits = document.getElementsByName("fruit");
+        var mycheckbox=document.getElementById('mycheckbox');
+
+        var totalprice = 0;
+
+        for (var i = 0; i < fruits.length; i++) {
+
+            if (fruits[i].checked) {
+
+                totalprice += parseInt(fruits[i].value);
+
+            }
+            if(fruits[i].checked==false){
+                mycheckbox.checked=false;
+            }
+
+        }
+        var myspan=document.getElementById('myspan')
+        myspan.innerText = totalprice + "元";
+
+    }
+
+</script>
+
+
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="10"/>苹果10元<br />
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="20"/>香蕉20元<br />
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="30"/>菠萝30元<br />
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="50"/>哈密瓜50元<br />
+
+<input type="checkbox" id="mycheckbox" onclick="selectCheckbox2()" />是否全选
+总价格：<span id="myspan">0元</span>
+</body>
+
+</html>

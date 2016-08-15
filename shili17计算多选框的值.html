@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title></title>
+
+</head>
+
+<script type="text/javascript" language="JavaScript">
+
+    function gouwu() {
+
+        /*var fruits = document.getElementsByName("fruit");
+        var totalprice = 0;
+        for (var i = 0; i < fruits.length; i++) {
+            if (fruits[i].checked) {
+                totalprice += parseInt(fruits[i].value);
+            }
+        }
+        var myspan=document.getElementById('myspan')
+        myspan.innerText = totalprice + "元";*/
+        var totalprice = 0;
+        var fruits=document.getElementsByName('fruit');
+        for (var i=0;i<fruits.length;i++){
+            if (fruits[i].checked){
+                totalprice+=parseInt(fruits[i].value);
+            }
+        }
+
+        document.getElementById('myspan').innerText=totalprice+"元"
+
+    }
+
+</script>
+
+<body>
+
+<h1>购物车</h1>
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="10"/>苹果10元<br/>
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="20"/>香蕉20元<br/>
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="30"/>菠萝30元<br/>
+
+<input type="checkbox" name="fruit" onclick="gouwu(this)" value="50"/>哈密瓜50元<br/><br/>
+
+总价格：<span id="myspan">0元</span>
+
+</body>
+
+</html>

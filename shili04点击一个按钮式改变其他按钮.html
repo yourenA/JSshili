@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="btn()">
+<script type="text/javascript">
+    function btn() {
+        var inputs = document.getElementsByTagName("input"); //取出名字为input的值
+        for (var i =0; i < inputs.length; i++) { //遍历
+            var input = inputs[i];
+            input.onclick = btnclick; //当某个按钮被点击时调用btnclick函数
+        }
+    }
+    function btnclick() {
+        var inputs = document.getElementsByTagName("input"); //取出input的值
+        for (var i =0; i < inputs.length; i++) {
+            var input = inputs[i]; //遍历
+            if (input == window.event.srcElement) { //如果被点击
+                input.value ="呜呜"; //将值改为呜呜
+            }
+            else {
+                input.value ="哈哈"; //每点击的为哈哈
+            }
+        }
+    }
+</script>
+<input type="button" value="哈哈"/>
+<input type="button" value="哈哈"/>
+<input type="button" value="哈哈"/>
+<input type="button" value="哈哈"/>
+<input type="button" value="哈哈"/>
+<input type="button" value="哈哈"/>
+</body>
+</html>

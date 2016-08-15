@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function  getWindow () {
+            if(typeof window.innerWidth !='undefined') {
+                return{
+                    width : window.innerWidth,
+                    height : window.innerHeight
+                }
+
+            } else{
+                return {
+                    width : document.documentElement.clientWidth,
+                    height : document.documentElement.clientHeight
+                }
+            }
+        }
+        console.log(getWindow ())
+        console.log(getWindow ().width);
+        console.log(getWindow ().height);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

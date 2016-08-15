@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+    <TITLE> New Document </TITLE>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <script type="text/javascript"><!--
+    /*在没有加载之前显示<div id="loadbox">里面的内容*/
+    document.write('<div id="loadbox"><span>加载中，请耐心等待</span><img src="http://files.jb51.net/upload/2010-4/20100411182122592.gif" width="160" height="20" /></div>');
+    window.onload = function () {
+        document.getElementById('loadbox').style.display="none";//把onload之前的东西隐藏
+        document.getElementById('imglist').style.display="block";//onload后面的东西显示
+    }
+    // -->
+    </script>
+    <style type="text/css">
+        body {background-color:#000;}
+        #imglist { display:none;color:#FFFFFF;}
+        #loadbox { width:160px;height:60px; position:absolute;top:50%;left:50%;margin-left:-80px;margin-top:-30px;}
+        #loadbox span {height:30px;display:block;width:160px;text-align:center; color:#FFF; font-size:12px;}
+    </style>
+</HEAD>
+<BODY>
+<div id="imglist">
+    <h1>欧文加油！</h1>
+    <img src="http://files.jb51.net/upload/2010-4/20100411182122712.jpg" width="500" height="413" />
+    <img src="http://files.jb51.net/upload/2010-4/20100411182123800.jpg" width="800" height="600" />
+</div>
+</BODY>
+</html>

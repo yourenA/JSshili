@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .big-box{
+            width: 1000px;
+            height: auto;
+            border: 1px solid #000;
+        }
+        .pics-box{
+            width: 1000px;
+            height: 600px;
+            overflow: hidden;
+            background: slategrey;
+            margin: 0 auto;
+        }
+        ul li.pic-item{
+            list-style: none;
+            width: 280px;
+            height: 200px;
+            padding-right: 10px;
+            padding-top: 10px;
+        //background: mediumseagreen;
+            float: left;
+            overflow: hidden;
+            display: inline-block;
+
+        }
+        ul li.pic-item .link{
+            display: inline-block;
+            width: 280px;
+            height: 157px;
+        }
+        ul li.pic-item a img{
+            width: 280px;
+            height: 157px;
+            border: 0;
+            overflow: hidden;
+        }
+        ul li.pic-item p{
+            width: 280px;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+            height: 30px;
+            font-size: 16px;
+            text-align: center;
+            line-height: 30px;
+        }
+        ul li.pic-item p a{
+            color: #000000;
+            text-decoration: none;
+        }
+        .pages-box{
+            width: 100%;
+            height: 100px;
+        // background: darkseagreen;
+            margin: 0 auto;
+            overflow-y: auto;
+        }
+        /* .pages-box a{
+             display: inline-block;
+             width: 20px;
+             height: 20px;
+             margin: 20px 20px;
+             border: 1px solid #000000;
+             text-align: center;
+             line-height: 20px;
+         }*/
+        input{
+            width: 200px;
+            height: 20px;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        .fanye p{
+            width: 330px;
+            margin: 30px auto;
+            font-size: 14px;
+        }
+        .fanye p a{
+            margin-left: 20px;
+            text-decoration: none;
+            color: #999899;
+
+        }
+        .fanye a:hover{
+            color: #c40001;
+        }
+    </style>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var pages;
+            function loadSize(){
+                var bigBoxW=$('.pics-box').width();/*获取容器的宽高*/
+                var bigBoxH=$('.pics-box').height();
+                console.log(bigBoxW+"."+bigBoxH);
+
+                var picItemW=$('.pic-item').innerWidth();/*获取每个列表的宽高*/
+                var picItemH=$('.pic-item').innerHeight();
+                console.log(picItemW+"."+picItemH);
+
+                var countH=parseInt(bigBoxH/picItemH);/*行数*/
+                var countW=parseInt(bigBoxW/picItemW);/*列数*/
+                console.log(countW+"."+countH);
+
+                var showCount=countW*countH;/*一页显示的个数*/
+                console.log(showCount);
+
+                var allCount=$('.pics-box-ul li').length;/*总的个数*/
+                console.log(allCount);
+
+                for (var i=0;i<allCount;i++){/*初始的时候显示第一页*/
+                    $('.pics-box-ul li').eq(i).hide();/*初始的时候全部隐藏*/
+                    for (var j=0;j<showCount;j++){
+                        $('.pics-box-ul li').eq(j).show();/*第一页显示*/
+                    }
+                }
+
+                var nowpage=1;
+                pages=Math.ceil(allCount/showCount);/*页数*/
+                console.log(pages);
+                $('#now').text(nowpage);
+                $('#pageCount').text(pages);
+
+                $('#next').click(function(){
+                    if (nowpage<pages){
+                        nowpage++;
+                        $('#now').text(nowpage);
+                        $('.pics-box-ul li').hide();
+                        for (var m=(nowpage-1)*showCount;m<nowpage*showCount;m++){
+                            console.log(m);
+                            $('.pics-box-ul li').eq(m).show();
+                        }
+                    }else{
+                        return false;
+                    }
+                });
+                $('#pre').click(function(){
+
+                    if (nowpage>1){
+                        nowpage--;
+                        $('#now').text(nowpage);
+                        $('.pics-box-ul li').hide();
+                        for (var m=(nowpage-1)*showCount;m<nowpage*showCount;m++){
+                            console.log(m);
+                            $('.pics-box-ul li').eq(m).show();
+                        }
+                    }else{
+                        return false;
+                    }
+                });
+
+                $('#first').click(function(){
+                    nowpage=1;
+                    $('#now').text(nowpage);
+                    $('.pics-box-ul li').hide();
+                    for (var m=(nowpage-1)*showCount;m<nowpage*showCount;m++){
+                        console.log(m);
+                        $('.pics-box-ul li').eq(m).show();
+                    }
+                });
+                $('#last').click(function(){
+                    nowpage=pages;
+                    $('#now').text(nowpage);
+                    $('.pics-box-ul li').hide();
+                    for (var m=(nowpage-1)*showCount;m<nowpage*showCount;m++){
+                        console.log(m);
+                        $('.pics-box-ul li').eq(m).show();
+                    }
+                });
+                /*$('.pages-box').html("");
+                 for(var n=1;n<=pages;n++){/!*将页数添加到页面*!/
+
+                 $('<a href="javascript:void(0);">'+n+'</a>').appendTo('.pages-box');
+                 }
+                 $('.pages-box a').bind("click",function(){/!*点击页码的时候显示相应页面*!/
+                 var page=$(this).index();
+                 console.log("页码"+page);
+                 $('.pics-box-ul li').hide();/!**!/
+                 for (var m=page*showCount;m<(page+1)*showCount;m++){
+                 console.log(m);
+                 $('.pics-box-ul li').eq(m).show();
+                 }
+                 });*/
+
+
+            }
+            loadSize();
+
+            $('#qr').click(function(){
+
+                var rqgd=parseInt($('#rqgd').val());
+                var rqkd=parseInt($('#rqkd').val());
+                if(rqgd<210||rqkd<290){
+                    alert("输入的宽度或高度过小");
+                    return false;
+                }
+                else{
+                    var pageH=$('.pages-box').height();
+                    var bigH=parseInt(rqgd)+pageH;
+                    $('.big-box').width(rqkd);
+                    $('.big-box').height(bigH);
+
+                    $('.pics-box').width(rqkd);
+                    $('.pics-box').height(rqgd);
+                    loadSize();
+                }
+
+            })
+
+        })
+    </script>
+</head>
+<body>
+<div class="big-box">
+    <div class="pics-box">
+        <ul class="pics-box-ul">
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题1</a></p>
+            </li>
+            <li class="pic-item">
+                <a href=""    class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题2</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题3</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题4</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题5</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题6</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题7</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题8</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题9</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题10</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题11</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题12</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题13</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题14</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题15</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题16</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题17</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题18</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题19</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题20</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题21</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题22</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题23</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题24</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题25</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题26</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题27</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题28</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题29</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题30</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题31</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题32</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题33</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题34</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题35</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题36</a></p>
+            </li>
+            <li class="pic-item">
+                <a href=""><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题37</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题38</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题39</a></p>
+            </li>
+            <li class="pic-item">
+                <a href=""><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题40</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题41</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题42</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题43</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题44</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题45</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题46</a></p>
+            </li>
+            <li class="pic-item">
+                <a href=""><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题47</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题48</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题49</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题50</a></p>
+            </li>
+            <li class="pic-item">
+                <a href="" class="link"><img src="img/1.jpg" alt=""></a>
+                <p><a href="">标题51</a></p>
+            </li>
+        </ul>
+
+    </div>
+    <div class="pages-box">
+        <div class="fanye">
+            <p>当前<span id="now">1</span>/<span id="pageCount"></span>页 <a href="javascript:void(0);" id="first">首页</a><a href="javascript:void(0);" id="pre">上一页</a><a href="javascript:void(0);" id="next">下一页</a><a
+                    href="javascript:void(0);" id="last">尾页</a>
+                <!-- 转到
+                <select name="" id="">
+                    <option value="">1</option>
+                    <option value="">2</option>
+                    <option value="">3</option>
+                </select>
+                页-->
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="form">
+    <label for="rqgd">容器高度</label><input id="rqgd" type="text"><br>
+    <label for="rqkd">容器宽度</label><input id="rqkd" type="text"><br>
+
+    <input type="button" value="确认" id="qr">
+</div>
+
+
+</body>
+</html>

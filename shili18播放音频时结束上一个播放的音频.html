@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../../js/jquery-1.9.1.min.js"></script>
+    <script>
+        var playing = false, currentAudio = null;
+        $(document).on('click', '.audio', function () {/*当按钮点击时*/
+            var $audio = $(this).find("audio");/*找到按钮下面那的音频*/
+            $audio.attr("src", $audio.data("src"));
+            console.log("音频地址" +$audio.attr('src'));
+            if (playing) {/*如果playing为真，代表有正在播放的音频*/
+                playing = false;/*将playing改为假*/
+                currentAudio.pause();/*将正在播放的音频暂停*/
+                currentAudio.currentTime = 0;/*当前播放位置*/
+                console.log(currentAudio)
+                currentAudio = null;/*清除当前的播放音频*/
+            }
+            playing = true;
+            currentAudio = $audio.get(0);
+            currentAudio.play();
+            console.log("当前按钮"+$(this).text());
+        });
+    </script>
+</head>
+<body>
+<button class="btn audio">
+    播放语音1
+    <audio data-src="音频地址2"></audio><!--实际的播放地址用属性存储,避免同时加载音频-->
+</button>
+<button class="btn audio">
+    播放语音2
+    <audio data-src="音频地址2"></audio>
+</button>
+<button class="btn audio">
+    播放语音3
+    <audio data-src="音频地址3"></audio>
+</button>
+<button class="btn audio">
+    播放语音4
+    <audio data-src="音频地址4"></audio>
+</button>
+<button class="btn audio">
+    播放语音5
+    <audio data-src="音频地址5"></audio>
+</button>
+</body>
+</html>
